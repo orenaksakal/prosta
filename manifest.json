@@ -1,0 +1,25 @@
+{
+  "name": "Prosta",
+  "version": "0.1",
+  "description": "Toolbox for oracle maxymiser production team. Created by Oren Aksakal (orenaksakal@gmail.com).",
+  "browser_action": {
+    "default_title": "Prosta",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*","https://*/*"],
+      "js": ["main.js"]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "manifest_version": 2
+}
