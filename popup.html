@@ -1,127 +1,136 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <style>
-    body {
-      background: #F7F7F7;
-      width: 350px;
-      margin: 0 auto;
-      font-size: 14px;
-    }
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #F7F7F7;
+            width: 350px;
+            margin: 0 auto;
+            font-size: 14px;
+        }
 
-    .btn-create {
-      background-color: #2196f3;
-      border-radius: 2px;
-      color: #ffffff;
-      font-size: 12px;
-    }
+        .btn-create {
+            background-color: #2196f3;
+            border-radius: 2px;
+            color: #ffffff;
+            font-size: 12px;
+        }
 
-    .checkbox input {
-      width: 20px;
-      height: 20px;
-    }
+        .checkbox input {
+            width: 20px;
+            height: 20px;
+        }
 
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-      margin: 0 auto;
-    }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin: 0 auto;
+        }
 
-    .switch input {
-      display: none;
-    }
+        .switch input {
+            display: none;
+        }
 
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      -webkit-transition: .4s;
-      transition: .4s;
-    }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      -webkit-transition: .4s;
-      transition: .4s;
-    }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
-    input:checked + .slider {
-      background-color: #2196F3;
-    }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
 
-    input:focus + .slider {
-      box-shadow: 0 0 1px #2196F3;
-    }
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
 
-    input:checked + .slider:before {
-      -webkit-transform: translateX(26px);
-      -ms-transform: translateX(26px);
-      transform: translateX(26px);
-    }
-  </style>
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+    </style>
 </head>
 <body>
 
 <div class="card text-center">
-  <div class="card-header">
-    <h5>Selected Text Editor</h5>
-  </div>
-  <div class="card-body">
-    <p class="card-text">
-      <span id="output">"Example text which was selected"</span>
-    </p>
-
-    <div class="form-group">
-      <input type="email" class="form-control form-control-sm" id="fontfamily" placeholder="Font family e.g. Arial">
+    <div class="card-header">
+        <h5>Selected Text Editor</h5>
     </div>
+    <div class="card-body">
+        <p class="card-text">
+            <span id="output">"Example text which was selected"</span>
+        </p>
 
-    <div class="form-group">
-      <input type="email" class="form-control form-control-sm" id="fontsize" placeholder="Font size e.g. 12px">
-    </div>
+        <div class="form-group">
+            <input type="email" class="form-control form-control-sm" id="fontfamily"
+                   placeholder="Font family e.g. Arial or FiraCode">
+        </div>
 
-    <div class="form-group">
-      <input type="email" class="form-control form-control-sm" id="fontcolor"
-             placeholder="Font color e.g. black or #0000">
+        <div class="form-group">
+            <input type="email" class="form-control form-control-sm" id="fontsize" placeholder="Font size e.g. 12px or 1em">
+        </div>
+
+        <div class="form-group">
+            <input type="email" class="form-control form-control-sm" id="fontcolor"
+                   placeholder="Font color e.g. black or #0000">
+        </div>
+
+        <div class="form-group">
+            <input type="email" class="form-control form-control-sm" id="fontweight"
+                   placeholder="Font weight e.g. bold or 900">
+        </div>
+
+        <button class="btn btn-primary" id="save">Save</button>
+
     </div>
-  </div>
 </div>
 
 <div class="card text-center">
-  <div class="card-header">
-    <h5>Content Highlighters</h5>
-  </div>
-  <div class="card-body">
-    <a href="#" class="btn btn-primary btn-create">+ CIRCLE</a>
-    <a href="#" class="btn btn-primary btn-create">+ SQUARE</a>
-    <a href="#" class="btn btn-primary btn-create">+ TRIANGLE</a>
-  </div>
+    <div class="card-header">
+        <h5>Content Highlighters</h5>
+    </div>
+    <div class="card-body">
+        <a href="#" class="btn btn-primary btn-create">+ CIRCLE</a>
+        <a href="#" class="btn btn-primary btn-create">+ SQUARE</a>
+        <a href="#" class="btn btn-primary btn-create">+ TRIANGLE</a>
+    </div>
 </div>
 
 <div class="checkbox-content editable">
-  <label class="switch">
-    <input type="checkbox">
-    <span class="slider"></span>
-  </label>
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+    </label>
 </div>
 
 <div class="checkbox-content draggable">
-  <label class="switch">
-    <input type="checkbox">
-    <span class="slider"></span>
-  </label>
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+    </label>
 </div>
 
 <script src="popup.js"></script>

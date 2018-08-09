@@ -1,7 +1,7 @@
-// /**
-//  * Author: Oren Aksakal <oren.aksakal@oracle.com>
-//  * Date: 7/1/18
-//  */
+/**
+ * Author: Oren Aksakal <oren.aksakal@oracle.com>
+ * Date: 7/1/18
+ */
 //
 // chrome.storage.onChanged.addListener(function (changes) {
 //     if (changes.editableText) {
@@ -17,9 +17,36 @@
 //     }
 // });
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    sendResponse({ selection: window.getSelection().toString() });
+//TODO: donot reacreate stype, replace it
+function applyChangesToSelection(messageObj) {
+    var range = window.getSelection().getRangeAt(0);
+    var span = document.createElement('span');
+    var css = document.createElement('style');
+    var spanClass = 'prosta-highlight-' + Date.now();
+    
+    function createStyle() {
+        css.type = 'text/css';
+        css.id = 'prosta';
+        css.innerHTML = '.' + spanClass + ' { font-size:' + messageObj.fontsize + '!important; color:' + messageObj.fontcolor + '!important; font-weight:' + messageObj.fontweight + '!important;}';
+        document.body.appendChild(css);
+    }
+    
+    span.className = spanClass;
+    span.appendChild(range.extractContents());
+    range.insertNode(span);
+    createStyle();
+}
+
+chrome.runtime.onMessage.addListener(function (messageObj, sender, sendResponse) {
+    if (messageObj.messageName === 'initiate') {
+        sendResponse({
+            selection: window.getSelection().toString(),
+        });
+    } else if (messageObj.messageName === 'applyChanges') {
+        applyChangesToSelection(messageObj);
+    }
 });
+
 //
 // // TODO: create element and set class for it and wrap selection by it so you can style
 // // var selectedRange = window.getSelection().getRangeAt(0);
@@ -27,9 +54,24 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 // // newNode.classList.add('selection');
 // // selectedRange.surroundContents(newNode);
 
-console.log('WW');
-// var range = window.getSelection().getRangeAt(0),
-//     span = document.createElement('span');
+// function applyChangesToSelection() {
+//     var range = window.getSelection().getRangeAt(0);
+//     var span = document.createElement('span');
+//     var css = document.createElement("style");
+//
+//     css.type = "text/css";
+//     css.innerHTML = ".hightlight { font-size:55px; color: red; }";
+//     document.body.appendChild(css);
+//
+//     span.className = 'highlight';
+//     span.appendChild(range.extractContents());
+//     range.insertNode(span);
+//
+//
+// }
+
+// var range = window.getSelection().getRangeAt(0);
+// var span = document.createElement('span');
 //
 // span.className = 'highlight';
 // span.appendChild(range.extractContents());

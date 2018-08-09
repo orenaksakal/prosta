@@ -40,18 +40,47 @@
 // })();
 //
 
-chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { greeting: 'hello' }, function (response) {
-        document.getElementById('output').innerHTML = response.selection;
+function sendMessage(messageObject, callback) {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, messageObject, function (response) {
+            callback(response);
+        });
     });
-});
+}
+
+function handleInitializationResponse(response) {
+    if (response.selection !== '') {
+        document.getElementById('output').innerHTML = response.selection;
+    } else {
+        document.getElementById('output').innerHTML = 'No text was selected, you are given this one to play with.';
+    }
+}
+
 
 fontfamily.addEventListener('input', function () {
     document.getElementById('output').style.fontFamily = fontfamily.value;
 });
 
-
 fontsize.addEventListener('input', function () {
     document.getElementById('output').style.fontSize = fontsize.value;
 });
 
+fontcolor.addEventListener('input', function () {
+    document.getElementById('output').style.color = fontcolor.value;
+});
+
+fontweight.addEventListener('input', function () {
+    document.getElementById('output').style.fontWeight = fontweight.value;
+});
+
+save.addEventListener('click', function () {
+    sendMessage({
+        messageName: 'applyChanges',
+        fontfamily: fontfamily.value,
+        fontsize: fontsize.value,
+        fontcolor: fontcolor.value,
+        fontweight: fontweight.value,
+    });
+});
+
+sendMessage({ messageName: 'initiate' }, handleInitializationResponse);
