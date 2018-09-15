@@ -10,12 +10,6 @@
             font-size: 14px;
         }
 
-        .btn-create {
-            background-color: #2196f3;
-            border-radius: 2px;
-            color: #ffffff;
-            font-size: 12px;
-        }
 
         .checkbox input {
             width: 20px;
@@ -90,7 +84,8 @@
         </div>
 
         <div class="form-group">
-            <input type="email" class="form-control form-control-sm" id="fontsize" placeholder="Font size e.g. 12px or 1em">
+            <input type="email" class="form-control form-control-sm" id="fontsize"
+                   placeholder="Font size e.g. 12px or 1em">
         </div>
 
         <div class="form-group">
@@ -108,29 +103,33 @@
     </div>
 </div>
 
+
 <div class="card text-center">
     <div class="card-header">
-        <h5>Content Highlighters</h5>
+        <h5>Editable Text </h5>
     </div>
     <div class="card-body">
-        <a href="#" class="btn btn-primary btn-create">+ CIRCLE</a>
-        <a href="#" class="btn btn-primary btn-create">+ SQUARE</a>
-        <a href="#" class="btn btn-primary btn-create">+ TRIANGLE</a>
+        <div class="checkbox-content editable">
+            <label class="switch">
+                <input type="checkbox" id="editable">
+                <span class="slider"></span>
+            </label>
+        </div>
     </div>
 </div>
 
-<div class="checkbox-content editable">
-    <label class="switch">
-        <input type="checkbox">
-        <span class="slider"></span>
-    </label>
-</div>
-
-<div class="checkbox-content draggable">
-    <label class="switch">
-        <input type="checkbox">
-        <span class="slider"></span>
-    </label>
+<div class="card text-center">
+    <div class="card-header">
+        <h5>Draggable Content</h5>
+    </div>
+    <div class="card-body">
+        <div class="checkbox-content draggable">
+            <label class="switch">
+                <input type="checkbox" id="draggable">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
 </div>
 
 <script src="popup.js"></script>
